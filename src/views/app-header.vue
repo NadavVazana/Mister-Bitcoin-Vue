@@ -14,6 +14,7 @@
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/contact">Contacts</RouterLink>
         <RouterLink to="/statistics">Statistics</RouterLink>
+        <RouterLink to="/login">Login</RouterLink>
       </nav>
 
     </div>

@@ -7,11 +7,12 @@ export default{
   data(){
     return{
       user:null,
-      rate: 0
+      rate: 0,
+
     }
   },
   async created(){
-    this.user = await userService.getUser()
+    this.user = this.$store.getters.loggedInUser.user
     const rate =  await bitcoinService.getRate()
     this.rate = rate.data
     
@@ -28,6 +29,12 @@ export default{
     <h2 class="balance">Balance:     {{user.balance}}</h2>
     <h2 class="rate">Bitcoin Rate:   {{rate}}</h2>
   </div>
+  <h1 class="trans-title">Your Transactions:</h1>
+  <ul class="trans-list">
+    <li v-for="trans in user.transactions" :key="trans">
+    <h1>To: {{trans.to.name}}</h1>
+    <h1>Coins: {{trans.coins}}</h1></li>
+  </ul>
 
 </div>
 
@@ -35,6 +42,36 @@ export default{
 
 <style lang="scss">
 .home-page{
+  .trans-title{
+    position: absolute;
+    top:40%;
+    left: 50%;
+    transform: translate(-40%,-50%);
+  }
+  .trans-list{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    list-style-type: none;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    background-color: gold;
+    li{
+      padding: 10px;
+      width: 150px;
+      height: 150px;
+      border: 1px rgba(128, 128, 128, 0.185) solid;
+    text-align: center;
+
+      h1{
+    text-align: center;
+
+        font-size: 1rem;
+        font-weight: 700;
+      }
+    }
+  }
   height: 100vh;
   .user-details{
     border: 1px solid black;
