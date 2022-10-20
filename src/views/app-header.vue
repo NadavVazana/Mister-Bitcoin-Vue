@@ -21,11 +21,10 @@
 </template>
 
 <script>
-import { userService } from '../services/user.service';
 
 export default {
     async created(){
-         this.user = await userService.getUser()
+         this.user = this.$store.getters.loggedInUser.user
          
     },
     data(){
